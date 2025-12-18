@@ -7,7 +7,7 @@ test('Browser Context Playwright test', async ({browser}) => {
 
     // New Page or Tab instance
     const pageInstance = await browserContext.newPage(); 
-    await pageInstance.goto('https://google.com');
+    await pageInstance.goto('https://playwright.dev/');
 });
 
 // Page Context test
