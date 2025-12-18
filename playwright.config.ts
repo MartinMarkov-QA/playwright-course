@@ -11,7 +11,7 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-export default defineConfig({
+const config = defineConfig({
   testDir: './tests',
   use: {
 
@@ -19,3 +19,4 @@ export default defineConfig({
 
   }
 });
+module.exports = config;
