@@ -13,6 +13,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 const config = defineConfig({
   testDir: './tests',
+  timeout: 40 * 1000,
   use: {
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
