@@ -19,8 +19,21 @@ const config = defineConfig({
   },
   reporter: 'html',
   use: {
-    browserName: 'chromium',
 
-  }
+  },
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
+  ]
 });
 module.exports = config;
