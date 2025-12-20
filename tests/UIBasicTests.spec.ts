@@ -22,7 +22,7 @@ test('Page Context Playwright test', async ({page, context}) => {
 
     await page.goto('https://www.automationexercise.com/login');
 
-    // Cookies consent button
+    // Cookies consent
     const _cookies: Locator = page.getByRole('button', {name: 'Consent'});
 
     // Login form elements
@@ -31,7 +31,9 @@ test('Page Context Playwright test', async ({page, context}) => {
     const _loginBtn: Locator = page.getByTestId('login-button');
 
     // Test action
-    await _cookies.click();
+    await _cookies
+    .click({ timeout: 8000 })
+    .catch(() => console.log('Consent banner not present – continuing (common in CI)'));
     await _userName.fill('test@test.com');
     await _password.fill('1234');
     await _loginBtn.click();
