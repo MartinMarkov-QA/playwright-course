@@ -22,8 +22,10 @@ test('Page Context Playwright test', async ({page, context}) => {
 
     await page.goto('https://www.automationexercise.com/login');
 
-    // Login form elements
+    // Cookies consent button
     const _cookies: Locator = page.getByRole('button', {name: 'Consent'});
+
+    // Login form elements
     const _userName: Locator = page.getByTestId('login-email');
     const _password: Locator = page.getByTestId('login-password');
     const _loginBtn: Locator = page.getByTestId('login-button');
