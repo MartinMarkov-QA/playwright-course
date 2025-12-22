@@ -38,16 +38,9 @@ test('Login and verify "Blue Top" product is present', async ({page}) => {
     await _password.fill(userForTesting.password);
     await _loginBtn.click();
     await expect(_getSingleProductName('Blue Top')).toBeVisible();
-    
-    
-});
 
-// Browser Context test
-test('Browser Context Playwright test', async ({browser}) => {
-    // New browser instance where you can pass all the settings like cookies etc
-    const browserContext = await browser.newContext();
-
-    // New Page or Tab instance
-    const pageInstance = await browserContext.newPage(); 
-    await pageInstance.goto('https://playwright.dev/');    
+    const sp = page.locator('.features_items .productinfo p');
+    let allProductsNames = await sp.allTextContents();
+    console.log(12345);
+    console.log(allProductsNames);
 });
