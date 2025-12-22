@@ -5,8 +5,16 @@ test.use({
   testIdAttribute: 'data-qa',  // Now getByTestId() will use data-qa
 });
 
+
+
+const userForTesting = {
+    userName: 'martinmarkov@gmail.com',
+    password: '408812',
+};
+
+
 // Automate login form
-test('Assert login form wrong credentials message', async ({page}) => {
+test('Login and verify "Blue Top" product is present', async ({page}) => {
 
     await page.goto('https://www.automationexercise.com/login');
 
@@ -18,16 +26,20 @@ test('Assert login form wrong credentials message', async ({page}) => {
     const _password: Locator = page.getByTestId('login-password');
     const _loginBtn: Locator = page.getByTestId('login-button');
     const _errorMessage: Locator = page.getByText('Your email or password is incorrect!', { exact: true });
+    const _getSingleProductName = (productName: string): Locator => {
+       return page.locator('.features_items .single-products').filter({ hasText: productName });
+    };
 
     // Test action
     await _cookiesAgreeBtn
     .click({ timeout: 8000 })
     .catch(() => console.log('Consent banner not present – continuing (common in CI)'));
-    await _userName.fill('test@test.com');
-    await _password.fill('1234');
+    await _userName.fill(userForTesting.userName);
+    await _password.fill(userForTesting.password);
     await _loginBtn.click();
-    await expect(_errorMessage).toBeVisible();
-    console.log('End of the Test');
+    await expect(_getSingleProductName('Blue Top')).toBeVisible();
+    
+    
 });
 
 // Browser Context test

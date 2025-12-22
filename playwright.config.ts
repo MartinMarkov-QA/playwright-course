@@ -15,7 +15,7 @@ const config = defineConfig({
   testDir: './tests',
   timeout: 20 * 1000,
   expect: {
-    timeout: 5000,
+    timeout: 5 * 1000,
   },
   reporter: 'html',
   use: {
