@@ -5,13 +5,10 @@ test.use({
   testIdAttribute: 'data-qa',  // Now getByTestId() will use data-qa
 });
 
-
-
 const userForTesting = {
     userName: 'martinmarkov@gmail.com',
     password: '408812',
 };
-
 
 // Automate login form
 test('Login and verify "Blue Top" product is present', async ({page}) => {
@@ -43,4 +40,7 @@ test('Login and verify "Blue Top" product is present', async ({page}) => {
     let allProductsNames = await sp.allTextContents();
     console.log(12345);
     console.log(allProductsNames);
+    // await page.locator('your locator').waitFor()
+    // await page.locator('your locator').first().waitFor();
+    // await page.locator('your locator').last().waitFor();
 });
