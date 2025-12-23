@@ -18,4 +18,8 @@ test('Selecting element from static drop down', async ({ page }) => {
     await checkboxUser.last().click();
     await okayBtn.click();
     await expect(checkboxUser.last()).toBeChecked();
+
+    // Link attributes 
+    const topLink = page.getByRole('link', { name: 'Free Access to InterviewQues/ResumeAssistance/Material' });
+    await expect(topLink).toHaveAttribute('class', 'blinkingText');
 })
