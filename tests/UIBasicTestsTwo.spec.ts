@@ -1,4 +1,4 @@
-import { Locator, test } from "@playwright/test";
+import { expect, Locator, test } from "@playwright/test";
 
 
 test('Selecting element from static drop down', async ({ page }) => {
@@ -9,10 +9,13 @@ test('Selecting element from static drop down', async ({ page }) => {
     // Select dropdown
     const dropDown = page.getByRole('combobox');
     await dropDown.selectOption('Consultant');
+    await expect(dropDown).toHaveValue('consult');
+    
     
     // Check boxes
     const checkboxUser = page.locator('.checkmark');
     const okayBtn = page.getByRole('button', { name: 'Okay'});
     await checkboxUser.last().click();
-    await await okayBtn.click();
+    await okayBtn.click();
+    await expect(checkboxUser.last()).toBeChecked();
 })
