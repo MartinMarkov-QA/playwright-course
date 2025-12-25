@@ -58,4 +58,5 @@ test.only('Two page interaction', async({ browser }) => {
 
     // Populating the username data from page two to page one
     await pageOne.getByRole('textbox', { name: 'Username:' }).fill(pageTwoDataUserName);
+    await pageOne.pause();
 })
