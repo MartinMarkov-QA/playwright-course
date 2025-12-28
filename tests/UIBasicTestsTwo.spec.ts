@@ -1,5 +1,4 @@
 import { expect, Locator, test } from "@playwright/test";
-import { log } from "node:console";
 
 
 test('Selecting element from static drop down', async ({ page }) => {
@@ -25,7 +24,7 @@ test('Selecting element from static drop down', async ({ page }) => {
     await expect(topLink).toHaveAttribute('class', 'blinkingText');
 })
 
-test.only('Two page interaction', async({ browser }) => {
+test('Two page interaction', async({ browser }) => {
     // Creating new browser context where you can pass browser settings like cookies etc
     const context = await browser.newContext();
     
@@ -43,9 +42,6 @@ test.only('Two page interaction', async({ browser }) => {
     // Create the new/second page instance
     const pageTwo = await pagePromise;
 
-    // Console the new page/tab title
-    console.log(await pageTwo.title());
-
     // Second page locator
     const pageTwoDataLocator: Locator = pageTwo.getByText('Please email us at mentor@rahulshettyacademy.com with below template to receive response', { exact: true });
 
@@ -58,5 +54,4 @@ test.only('Two page interaction', async({ browser }) => {
 
     // Populating the username data from page two to page one
     await pageOne.getByRole('textbox', { name: 'Username:' }).fill(pageTwoDataUserName);
-    await pageOne.pause();
 })

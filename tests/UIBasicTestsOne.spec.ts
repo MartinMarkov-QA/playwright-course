@@ -43,12 +43,4 @@ test('Login and verify "Blue Top" product is present', async ({ page }) => {
   await _password.fill(userForTesting.password);
   await _loginBtn.click();
   await expect(_getSingleProductName("Blue Top")).toBeVisible();
-
-  const sp = page.locator(".features_items .productinfo p");
-  let allProductsNames = await sp.allTextContents();
-  console.log(12345);
-  console.log(allProductsNames);
-  // await page.locator('your locator').waitFor()
-  // await page.locator('your locator').first().waitFor();
-  // await page.locator('your locator').last().waitFor();
 });

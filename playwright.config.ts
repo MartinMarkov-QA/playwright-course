@@ -19,7 +19,8 @@ const config = defineConfig({
   },
   reporter: 'html',
   use: {
-
+    screenshot: 'only-on-failure',
+    trace: 'retain-on-failure',
   },
   projects: [
     {
