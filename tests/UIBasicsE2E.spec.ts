@@ -44,6 +44,7 @@ test.describe("Login and find a specific product and click add to basket", () =>
       const _viewCartModalBtn: Locator = page.getByText('View Cart', { exact: true });
       
       await _menTshirtProductBtn.click();
+      await _productAddedModal.waitFor();
       await expect(_productAddedModal).toBeVisible();
       await _viewCartModalBtn.click();
     });
@@ -57,14 +58,14 @@ test.describe("Login and find a specific product and click add to basket", () =>
       await _checkoutBtn.click();
     });
 
-    await test.step("Test with google auto suggestion", async () => {
-      await page.goto('https://www.google.com/');
-      const cookiesBtn: Locator = page.getByText('Reject all', { exact: true });
-      await cookiesBtn.click();
-      const textArea: Locator = page.locator('.gLFyf');
-      await textArea.pressSequentially('ind');
-      const suggestionRes: Locator = page.getByText('indeed', { exact: true });
-      await suggestionRes.click();
+    await test.step("Verify the product is in the Review Your Order page and place the order", async () => {
+      const _reviewYourOrderSection: Locator = page.getByRole('heading', { name: 'Review Your Order' });
+      const _menTshirt: Locator = page.getByRole('link', { name: 'Men Tshirt' });
+      const _placeOrderBtn: Locator = page.getByRole('link', { name: 'Place Order' });
+
+      await expect(_reviewYourOrderSection).toBeVisible();
+      await expect(_menTshirt).toBeVisible();
+      await _placeOrderBtn.click();
     });
 
   });
