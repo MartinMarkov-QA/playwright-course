@@ -5,8 +5,8 @@ test.use({
   testIdAttribute: "data-qa", // Now getByTestId() will use data-qa
 });
 
-test.describe("Login and find a specific product and click add to basket", () => {
-  test("E2E test login > find product > add product > assert product > pay", async ({ page }) => {
+test.describe("E2E test login > place a order and pay", () => {
+  test("E2E test login > find product > add product > pay", async ({ page }) => {
 
     await test.step("Navigate to login page login and verify you are on home page", async () => {
       const loginUrl: string = "https://www.automationexercise.com/login";
@@ -66,6 +66,26 @@ test.describe("Login and find a specific product and click add to basket", () =>
       await expect(_reviewYourOrderSection).toBeVisible();
       await expect(_menTshirt).toBeVisible();
       await _placeOrderBtn.click();
+    });
+
+    await test.step("Pay and confirm the order", async () => {
+      const _cardName: Locator = page.locator('[name="name_on_card"]');
+      const _cardNumber: Locator = page.locator('[name="card_number"]');
+      const _cvcNumber: Locator = page.getByRole('textbox', { name: 'ex. 311' });
+      const _expiration: Locator = page.getByRole('textbox', { name: 'MM' });
+      const _year: Locator = page.getByRole('textbox', { name: 'YYYY' });
+      const _payBtn: Locator = page.getByRole('button', { name: 'Pay and Confirm Order' });
+      const _confirmationMsg: Locator = page.getByText('Congratulations! Your order has been confirmed!', { exact: true });
+
+      await expect(page).toHaveTitle('Automation Exercise - Payment');
+      await _cardName.fill('Name Example');
+      await _cardNumber.fill('1234');
+      await _cvcNumber.fill('122');
+      await _expiration.fill('12');
+      await _year.fill('2026');
+      await _payBtn.click();
+      await expect(page).toHaveTitle('Automation Exercise - Order Placed');
+      await expect(_confirmationMsg).toBeVisible();
     });
 
   });
