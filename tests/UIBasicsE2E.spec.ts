@@ -57,6 +57,15 @@ test.describe("Login and find a specific product and click add to basket", () =>
       await _checkoutBtn.click();
     });
 
+    await test.step("Test with google auto suggestion", async () => {
+      await page.goto('https://www.google.com/');
+      const cookiesBtn: Locator = page.getByText('Reject all', { exact: true });
+      await cookiesBtn.click();
+      const textArea: Locator = page.locator('.gLFyf');
+      await textArea.pressSequentially('ind');
+      const suggestionRes: Locator = page.getByText('indeed', { exact: true });
+      await suggestionRes.click();
+    });
 
   });
 });
